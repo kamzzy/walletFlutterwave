@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta(http-equiv='X-UA-Compatible', content='ie=edge') />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/custom.css">
+   
+    <script(src='https://use.fontawesome.com/releases/v5.0.13/js/solid.js', integrity='sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ', crossorigin='anonymous')></script>
+    <script( src='https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js', integrity='sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY', crossorigin='anonymous')></script>
+
+    <title>Receive Payment</title>
+  </head>
+  <body>
+  <header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Kamzzy's Wallet</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact Us</a>
+          </li>
+        </ul> -->
+      
+      </div>
+   
+  </nav>
+  </header>
+    <form>
+      <script src="https://checkout.flutterwave.com/v3.js"></script>
+      <button type="button" onClick="makePayment()">Check Out</button>
+    </form>
+<footer class="d-flex justify-content-center pt-5">
+  <p>&copy; 
+  <a(href='https://kamzzyprofile.herokuapp.com/'> kamzzy tech solutions </a></p>
+</footer>
+</div>
+    <script>
+      function makePayment() {
+        FlutterwaveCheckout({
+          public_key: "FLWPUBK_TEST-0cea62f0cd34121f3d761b484c57a298-X",
+          tx_ref: "hooli-tx-1920bbtyt",
+          amount: 1000,
+          currency: "NGN",
+          country: "NG",
+          payment_options: "",
+
+          // specified redirect URL
+          redirect_url: "http://localhost:4001/response",
+
+          // use customer details if user is not logged in, else add user_id to the request
+          customer: {
+            email: "demomail@gmail.com",
+            phone_number: "08088098622",
+            name: "Idris Olubisi",
+          },
+          callback: function (data) {
+            console.log(data);
+          },
+          onclose: function () {
+            // close modal
+          },
+          customizations: {
+            title: "Transaction Demo",
+            description: "A wallet payment Demo",
+            logo: "https://cdn.iconscout.com/icon/premium/png-256-thumb/payment-2193968-1855546.png",
+          },
+        });
+      }
+    </script>
+  </body>
+</html>
